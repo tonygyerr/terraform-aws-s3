@@ -1,7 +1,7 @@
 ## Module S3
 ```hcl
 module "s3" {
-  source        = "git::sshh://git@github.com:tonygyerr/terraform-aws-s3.git"
+  source        = "git::ssh://git@github.com:tonygyerr/terraform-aws-s3.git"
   sse_algorithm = "${var.sse_algorithm}"
   bucket_name   = "${var.bucket_name}"
   account_id  = "${var.account_id}"
