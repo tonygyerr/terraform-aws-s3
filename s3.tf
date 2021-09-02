@@ -146,7 +146,7 @@ resource "aws_s3_bucket_policy" "this" {
   #   s3_key_users         = jsonencode(var.s3_key_users),
   #   s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
   # })
-  policy          = var.s3_sagemaker_policy_file_path
+  policy          = var.s3_bucket_backend_policy_path
 }
 
 # resource "aws_s3_bucket_policy" "iot" {
