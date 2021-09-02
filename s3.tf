@@ -1,11 +1,6 @@
 resource "aws_s3_bucket" "this" {
   bucket        = var.bucket_name
-  # policy        = templatefile("${path.module}/policy/s3_prv_bucket_backend_policy.tmpl", {
-  #   s3_key_users         = jsonencode(var.s3_key_users),
-  #   s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
-  # })
-  policy        = var.s3_bucket_backend_policy_path
-  # policy        = file("${path.module}/policy/s3_prv_bucket_policy.json")
+  policy        = templatefile("${path.module}/${var.bucket_policy}")
   acl           = "private"
 
   lifecycle_rule {
@@ -142,19 +137,9 @@ resource "aws_s3_bucket" "this" {
 
 resource "aws_s3_bucket_policy" "this" {
   bucket = aws_s3_bucket.this.id
-  policy        = templatefile("${path.module}/${var.s3_bucket_backend_policy_path}", {
-    s3_key_users         = jsonencode(var.s3_key_users),
-    s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
-  })
-  # policy          = var.s3_bucket_backend_policy_path
+  policy        = templatefile("${path.module}/${var.bucket_policy}")
 }
 
-# resource "aws_s3_bucket_policy" "iot" {
-#   bucket = aws_s3_bucket.this.id
-#   policy = file("${path.module}/policy/iot-bucket-policy.json")
-# }
-
-# make the bucket have private access
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.id
 
