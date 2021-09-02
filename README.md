@@ -2,17 +2,20 @@
 ```hcl
 module "s3" {
   source        = "git::ssh://git@github.com:tonygyerr/terraform-aws-s3.git"
-  sse_algorithm = "${var.sse_algorithm}"
-  bucket_name   = "${var.bucket_name}"
-  account_id  = "${var.account_id}"
-  application = "${var.application}"
-  environment = "${var.environment}"
-  region      = "${var.aws_region}"
-  tags = var.tags
+  bucket_name   = "digital-reporting-system-dev"
+  bucket_policy = "policy/s3_bucket_reporting_policy.json"
+  sse_algorithm = "AES256"
+  aws_region    = "us-east-1"
+  tags          = {
+    Owner       = "cv-service"
+    Environment = "dev"
+    Name        = "cv-service-s3-iac"
+    Region      = "us-east-1"
+    CostCenter  = "cv-service"
+  }
 }
 ```
 ## Prerequisites
-- Docker (for using Docker Image of dependencies)
 - Git
 - Terraform
 - AWS Key pair for Terraform provisioning.

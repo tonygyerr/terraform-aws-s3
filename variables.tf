@@ -124,13 +124,7 @@ variable "tags" {
   type        = map(string)
   description = "optional tags"
 
-  # default = {
-  #   name        = ""
-  #   owner       = ""
-  #   costcenter  = ""
-  #   environment = ""
-  #   project     = ""
-  # }
+  default = {}
 }
 
 
