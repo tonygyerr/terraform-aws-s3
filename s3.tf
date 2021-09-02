@@ -1,6 +1,10 @@
 resource "aws_s3_bucket" "this" {
   bucket        = var.bucket_name
-  policy        = file("${path.module}/${var.bucket_policy}") 
+  # policy        = file("${path.module}/${var.bucket_policy}") 
+  policy        = templatefile("${path.module}/policy/s3-policy/s3_policy.tmpl", {
+    s3_key_users         = jsonencode(var.s3_key_users),
+    s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
+  })
   acl           = "private"
 
   lifecycle_rule {
@@ -137,8 +141,11 @@ resource "aws_s3_bucket" "this" {
 
 resource "aws_s3_bucket_policy" "this" {
   bucket = aws_s3_bucket.this.id
-  policy        = file("${path.module}/${var.bucket_policy}") 
-  
+  # policy        = file("${path.module}/${var.bucket_policy}") 
+  policy        = templatefile("${path.module}/policy/s3-policy/s3_policy.tmpl", {
+    s3_key_users         = jsonencode(var.s3_key_users),
+    s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
+  })
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
