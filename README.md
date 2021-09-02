@@ -111,3 +111,6 @@ plz run //:destroy_exe dev us-east-1
 | Name | Description |
 |------|-------------|
 | s3\_bucket\_id | n/a |
+
+## Contributors to this project
+- name: "Gyepi-Garbrah, Ekow (Tony) <a.gyepigarbrah@gmail.com>"
