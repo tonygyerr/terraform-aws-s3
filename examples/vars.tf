@@ -51,6 +51,11 @@ variable "s3_sagemaker_policy_file_path" {
   default     = ""
 }
 
+variable "bucket_policy" {
+  type        = string
+  default     = ""
+}
+
 variable "s3_bucket_backend_policy_path" {
   type        = string
   default     = ""
