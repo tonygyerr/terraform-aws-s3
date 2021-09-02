@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "this" {
   bucket        = var.bucket_name
-  policy        = var.bucket_policy
+  policy        = file("${path.module}/${var.bucket_policy}") 
   acl           = "private"
 
   lifecycle_rule {
@@ -137,7 +137,8 @@ resource "aws_s3_bucket" "this" {
 
 resource "aws_s3_bucket_policy" "this" {
   bucket = aws_s3_bucket.this.id
-  policy        = var.bucket_policy
+  policy        = file("${path.module}/${var.bucket_policy}") 
+  
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
