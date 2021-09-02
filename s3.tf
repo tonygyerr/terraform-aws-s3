@@ -142,11 +142,11 @@ resource "aws_s3_bucket" "this" {
 
 resource "aws_s3_bucket_policy" "this" {
   bucket = aws_s3_bucket.this.id
-  # policy        = templatefile("${path.module}/policy/sagemaker-s3-bucket-policy.tmpl", {
-  #   s3_key_users         = jsonencode(var.s3_key_users),
-  #   s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
-  # })
-  policy          = var.s3_bucket_backend_policy_path
+  policy        = templatefile("${path.module}/${var.s3_bucket_backend_policy_path}", {
+    s3_key_users         = jsonencode(var.s3_key_users),
+    s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
+  })
+  # policy          = var.s3_bucket_backend_policy_path
 }
 
 # resource "aws_s3_bucket_policy" "iot" {
