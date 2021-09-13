@@ -1,22 +1,40 @@
 {
     "Version": "2012-10-17",
     "Statement": [
-       {
-            "Sid": "allow-app-to-write-access-logs",
+        {
+            "Sid": "AllowRootAndHomeListingOfS3Bucket",
             "Effect": "Allow",
             "Principal": {
                 "AWS": ${s3_key_users}
             },
             "Action": [
-                "s3:PutObject",
-                "s3:PutObjectAcl",
-                "s3:PutObjectTagging",
-                "s3:PutObjectVersionAcl",
-                "s3:PutObjectVersionTagging",
                 "s3:GetObject",
-                "s3:GetObjectAcl"
+                "s3:ListBucket",
             ],
             "Resource": ${s3_bucket_resources}
+        },
+        {
+            "Sid": "BraghousePutAccess",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": ${s3_key_users}
+            },
+            "Action": "s3:PutObject",
+            "Resource": ${s3_bucket_resources}
+        },
+        {
+            "Sid": "ForceSSLOnlyAccess",
+            "Effect": "Deny",
+            "Principal": {
+               "AWS": "*"
+            },
+            "Action": "s3:*",
+            "Resource": ${s3_bucket_resources},
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
         }
     ]
 }
