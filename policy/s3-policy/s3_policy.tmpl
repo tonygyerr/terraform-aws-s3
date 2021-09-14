@@ -2,37 +2,25 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "AllowRootAndHomeListingOfS3Bucket",
+            "Sid": "AllowRootandHomeListingOfS3Bucket",
             "Effect": "Allow",
             "Principal": {
                 "AWS": ${s3_key_users}
             },
-            "Action": [
-                "s3:GetObject",
-                "s3:ListBucket",
-            ],
+            "Action": "s3:GetBucketAcl",
             "Resource": ${s3_bucket_resources}
         },
         {
-            "Sid": "BraghousePutAccess",
+            "Sid": "AllowRootandHomeListingOfS3Bucket",
             "Effect": "Allow",
             "Principal": {
                 "AWS": ${s3_key_users}
             },
             "Action": "s3:PutObject",
-            "Resource": ${s3_bucket_resources}
-        },
-        {
-            "Sid": "ForceSSLOnlyAccess",
-            "Effect": "Deny",
-            "Principal": {
-               "AWS": "*"
-            },
-            "Action": "s3:*",
             "Resource": ${s3_bucket_resources},
             "Condition": {
-                "Bool": {
-                    "aws:SecureTransport": "false"
+                "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control"
                 }
             }
         }
