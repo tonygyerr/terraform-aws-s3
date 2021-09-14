@@ -21,12 +21,10 @@ variable "tags" {
 
 variable "s3_key_users" {
   type        = list(string)
-  default     = []
 }
 
 variable "s3_bucket_resources" {
   type        = list(string)
-  default     = []
 }
 
 variable "s3_sagemaker_policy_file_path" {
