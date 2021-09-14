@@ -6,6 +6,8 @@ module "s3_reporting" {
     s3_key_users         = jsonencode(var.s3_key_users),
     s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
   }) 
+  s3_key_users  = var.s3_key_users
+  s3_bucket_resources = var.s3_bucket_resources
   sse_algorithm = "AES256"
   aws_region    = "us-east-1"
   tags          = {
