@@ -3,21 +3,10 @@ variable "aws_region" {
   default     = ""
 }
 
-# variable "owner" {
-#   default = ""
-# }
-
-# variable "CustName" {
-#   default = ""
-# }
-
-# variable "Cert1" {
-#   default = ""
-# }
-
-# variable "Cert2" {
-#   default = ""
-# }
+variable "profile" {
+  description = "Enter name of profile"
+  default     = ""
+}
 
 variable "bucket_name" {
   default     = ""

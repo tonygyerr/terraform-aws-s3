@@ -8,6 +8,11 @@ variable "aws_region" {
   # default     = ""
 }
 
+variable "profile" {
+  description = "Enter name of profile"
+  default     = ""
+}
+
 variable "sse_algorithm" {
   type    = string
   # default = ""
