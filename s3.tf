@@ -1,10 +1,11 @@
 resource "aws_s3_bucket" "this" {
   bucket        = var.bucket_name
-  # policy        = file("${path.module}/${var.bucket_policy}") 
-  policy        = templatefile("${path.module}/${var.bucket_policy}", {
-    s3_key_users         = jsonencode(var.s3_key_users),
-    s3_bucket_resources  = jsonencode(var.s3_bucket_resources) 
-  })
+  policy        = var.bucket_policy
+  #   #policy        = file("${path.module}/${var.bucket_policy}") 
+#   policy        = templatefile("${path.module}/${var.bucket_policy}", {
+#     s3_key_users         = jsonencode(var.s3_key_users),
+#     s3_bucket_resources  = jsonencode(var.s3_bucket_resources) 
+#   })
   acl           = "private"
 
   lifecycle_rule {
