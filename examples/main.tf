@@ -1,10 +1,11 @@
 module "s3_reporting" {
   source        = "git::ssh://git@github.com:tonygyerr/terraform-aws-s3.git"
   bucket_name   = "digital-reporting-system-dev"
-  bucket_policy = templatefile("${path.module}/${var.bucket_policy}", {
-    s3_key_users         = jsonencode(var.s3_key_users),
-    s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
-  }) 
+  bucket_policy = local.policy
+#   bucket_policy = templatefile("${path.module}/${var.bucket_policy}", {
+#     s3_key_users         = jsonencode(var.s3_key_users),
+#     s3_bucket_resources  = jsonencode(var.s3_bucket_resources)
+#   }) 
   s3_key_users  = var.s3_key_users
   s3_bucket_resources = var.s3_bucket_resources
   sse_algorithm = "AES256"
